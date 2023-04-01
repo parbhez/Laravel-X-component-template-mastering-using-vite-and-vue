@@ -1,0 +1,10 @@
+import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import '../../node_modules/@fortawesome/fontawesome-free/css/all.min.css'
+import '../../node_modules/jqvmap/dist/jqvmap.min.css'
+import '../../node_modules/weathericons/css/weather-icons.min.css'
+import '../../node_modules/weathericons/css/weather-icons-wind.min.css'
+import '../../node_modules/summernote/dist/summernote-bs4.css'
+
+import '../../public/assets/css/style.css'
+import '../../public/assets/css/components.css'
+//import '../../public/assets/css/plugin/analog-clock.css'
