@@ -48,6 +48,37 @@
 
     {{ $scripts ?? '' }}
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            if (typeof window.Echo !== "undefined") {
+                var userId = @json(auth()->check() ? auth()->user()->id : null);
+                window.Echo.channel(`private-chat.${userId}`).listen(".PrivateMessage", (data) => {
+                    console.log("Notification received:", data);
+
+                    if (data && data.title && data.remarks) {
+                        toastr.info(
+                            `<div class="notification-content">
+                            <i class="fas fa-user"></i> <span>${data.title}</span>
+                            <i class="fas fa-book" style="margin-left: 20px;"></i> <span>${data.remarks}</span>
+                        </div>`,
+                            "New Category Notification", {
+                                closeButton: true,
+                                progressBar: true,
+                                timeOut: 0,
+                                extendedTimeOut: 0,
+                                positionClass: "toast-top-right",
+                                enableHtml: true,
+                            }
+                        );
+                    } else {
+                        console.error("Invalid data received:", data);
+                    }
+                });
+            } else {
+                console.error("window.Echo is not defined");
+            }
+        });
+    </script>
 
 </body>
 
