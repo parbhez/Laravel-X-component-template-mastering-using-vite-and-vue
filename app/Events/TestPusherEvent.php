@@ -13,13 +13,13 @@ use Illuminate\Support\Facades\Log;
 
 class TestPusherEvent implements ShouldBroadcast
 {
-    public $data;
-    /**
-     * Create a new event instance.
-     */
-    public function __construct($data)
+    public $title;
+    public $author;
+
+    public function __construct($title, $author)
     {
-        $this->data = $data;
+        $this->title = $title;
+        $this->author = $author;
     }
 
     /**
@@ -27,30 +27,17 @@ class TestPusherEvent implements ShouldBroadcast
      *
      * @return array<int, \Illuminate\Broadcasting\Channel>
      */
-    public function broadcastOn(): array
+    public function broadcastOn()
     {
-        Log::info("Boradcast On entry");
+        return ['notifications'];
 
-        return [
-            new Channel("notification")
-        ];
+        // return [
+        //     new Channel('notifications')
+        // ];
     }
 
     public function broadcastAs()
     {
-        Log::info("Boradcast As entry");
         return 'post.created';
-    }
-
-    public function broadcastWith()
-    {
-        Log::info("Boradcast With entry");
-
-        return $this->data;
-
-        // return [
-        //     'author' => $this->data->author,
-        //     'title' => $this->data->title,
-        // ];
     }
 }

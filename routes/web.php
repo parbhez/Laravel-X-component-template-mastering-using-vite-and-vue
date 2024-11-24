@@ -1,5 +1,7 @@
 <?php
 
+use App\Events\CategoryCreated;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\DepartmentController;
@@ -32,8 +34,15 @@ Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 Route::view('/pusher', 'pusher');
+
+
 Route::get('/posts', [TestController::class, 'create'])->name('posts.create')->middleware('auth');
 Route::post('/posts', [TestController::class, 'store'])->name('posts.store')->middleware('auth');
+
+Route::get('/categories', [CategoryController::class, 'create'])->name('categories.create')->middleware('auth');
+Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store')->middleware('auth');
+
+
 
 Route::get('/sendMessage', [TestController::class, 'sendMessage'])->name('sendMessage')->middleware('auth');
 Route::resource('departments', DepartmentController::class)->except(['show'])->middleware('auth');

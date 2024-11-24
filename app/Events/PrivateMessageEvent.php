@@ -9,6 +9,7 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class PrivateMessageEvent
 {
@@ -27,7 +28,7 @@ class PrivateMessageEvent
     public function broadcastOn()
     {
         return [
-            new PrivateChannel('private-chat.' . $this->toUserId)
+            new PrivateChannel('post.created.' . $this->toUserId)
         ];
     }
 
@@ -35,5 +36,15 @@ class PrivateMessageEvent
     public function broadcastAs()
     {
         return 'PrivateMessage';
+    }
+
+    public function broadcastWith()
+    {
+        Log::info("Private Boradcast With entry");
+
+        return [
+            'title' => $this->message,
+            'author' => $this->toUserId,
+        ];
     }
 }

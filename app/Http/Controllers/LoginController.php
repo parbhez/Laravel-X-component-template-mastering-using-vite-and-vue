@@ -28,7 +28,7 @@ class LoginController extends Controller
            // Regenerate session to prevent session fixation
            $request->session()->regenerate();
 
-           return redirect()->intended('dashboard')->with('success', 'Welcome back!');
+           return redirect()->intended('/home')->with('success', 'Welcome back!');
        }
 
        // If authentication fails

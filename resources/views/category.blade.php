@@ -3,7 +3,7 @@
     <x-slot name="maincontent">
         <section class="section">
             <div class="section-header">
-                <h1>Create a New Post</h1>
+                <h1>Create a New Category</h1>
             </div>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-12 col-sm-12">
@@ -16,7 +16,7 @@
         <div id="success-message" class="alert alert-success d-none"></div>
         <div id="error-message" class="alert alert-danger d-none"></div>
                         <div class="card-body">
-                            <form action="{{ route('posts.store') }}" method="POST" id="postForm">
+                            <form action="{{ route('categories.store') }}" method="POST" id="postForm">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">

@@ -29,20 +29,27 @@ class TestController extends Controller
             'title' => $request->input('title'),
         ]);
 
-        // Dispatch the event with the post data
-        event(new TestPusherEvent([
-            'author' => $post->author,
-            'title' => $post->title,
-        ]));
+        event(new TestPusherEvent($post->title, $post->author));
 
-        // Redirect with success message
-        return redirect()->back()->with('successs', 'Post created successfully!');
+        // $validated = User::find(1)->toArray();
+        // // Trigger the event
+        // event(new PrivateMessageEvent("Test Notification for private channel", $validated['id']));
+
+            return response()->json([
+                'success' => 'Post created successfully!',
+                'post' => $post,
+            ]);
+
     }
 
 
     public function sendMessage(Request $request)
     {
-        $validated = User::find(2)->toArray();
+
+
+
+
+        $validated = User::find(1)->toArray();
         // Trigger the event
         event(new PrivateMessageEvent("Test Notification for private channel", $validated['id']));
 
