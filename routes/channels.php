@@ -48,3 +48,11 @@ Broadcast::channel('category.role.{roleName}', function ($user, $roleName) {
     return $user->role === $roleName;
 });
 
+
+// routes/channels.php
+
+Broadcast::channel('App.Models.User.{userId}', function ($user, $userId) {
+    // চেক করা হচ্ছে ব্যবহারকারীর 'id' চ্যানেলের 'userId' এর সাথে মিলছে কিনা
+    return (int) $user->id === (int) $userId;
+});
+

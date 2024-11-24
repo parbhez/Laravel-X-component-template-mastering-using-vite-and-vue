@@ -149,6 +149,27 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         );
             });
+
+
+            Echo.private('App.Models.User.' + user_id)
+                .notification((notification) => {
+                console.log('Notification received:', notification.category);
+                toastr.info(
+            `<div class="notification-content">
+                <i class="fas fa-user"></i> <span>${notification.category.author}</span>
+                <i class="fas fa-book" style="margin-left: 20px;"></i> <span>${notification.category.title}</span>
+            </div>`,
+            'Using Notify Notification', {
+                closeButton: true,
+                progressBar: true,
+                timeOut: 0, // Set timeOut to 0 to make it persist until closed
+                extendedTimeOut: 0, // Ensure the notification stays open
+                positionClass: 'toast-top-right',
+                enableHtml: true
+            }
+        );
+    });
+
     }
 });
 
